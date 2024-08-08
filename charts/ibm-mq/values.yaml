@@ -13,7 +13,7 @@
 # limitations under the License.
 
 # license must be set to "accept" to accept the terms of the IBM license
-license: "not accepted"
+license: "accept"
 
 image:
   # repository is the container repository to use
@@ -36,7 +36,7 @@ persistence:
   # dataPVC section specifies settings for the main Persistent Volume Claim, which is used for data in /var/mqm -> /mnt/mqm
   dataPVC:
     # enabled is whether to use this Persistent Volumes or not
-    enable: false
+    enable: true 
     # name sets part of the name for this Persistent Volume Claim
     name: "data"
     ## size is the minimum size of the Persistent Volume
@@ -47,7 +47,7 @@ persistence:
   # logPVC section specifies settings for the main Persistent Volume Claim, which is used for log in /mnt/mqm-log
   logPVC:
     # enabled is whether to use this Persistent Volumes or not
-    enable: false
+    enable: true 
     # name sets part of the name for this Persistent Volume Claim
     name: "log"
     ## size is the minimum size of the Persistent Volume
@@ -89,7 +89,7 @@ security:
 # queueManager section specifies settings for the MQ Queue Manager
 queueManager:
   # name allows you to specify the name to use for the queue manager.  Defaults to the Helm release name.
-  name:
+  name: QM1
   # nativeha specifies whether to run in nativeha mode with an active and two following container instances
   nativeha:
     enable: false
@@ -105,7 +105,11 @@ queueManager:
   # Allows QM INI snippets to be loaded from secrets. These will be loaded into the running instance
   qminiSecrets: []
   # Enviroment variables to be associated with the queue manager containers
-  envVariables: []
+  envVariables: 
+    - name: MQ_ADMIN_PASSWORD
+      value: "Passw0rd" 
+    - name: MQ_APP_PASSWORD
+      value: "Passw0rd" 
   # The duration in seconds the Queue Manager needs to terminate gracefully, difference in time between SIGTERM and SIGKILL
   terminationGracePeriodSeconds: 30
   # The stateful set updateStrategy policy
@@ -149,8 +153,8 @@ route:
       webconsole: false
       mqtraffic: false
     openShiftRoute:
-      webconsole: false
-      mqtraffic: false
+      webconsole: true 
+      mqtraffic: true 
     loadBalancer:
       webconsole: false
       mqtraffic: false
