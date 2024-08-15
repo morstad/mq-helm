@@ -42,7 +42,7 @@ persistence:
     ## size is the minimum size of the Persistent Volume
     size: 2Gi
     ## storageClass to use for this PVCs
-    storageClassName: ""
+    storageClassName: "ocs-storagecluster-ceph-rbd"
 
   # logPVC section specifies settings for the main Persistent Volume Claim, which is used for log in /mnt/mqm-log
   logPVC:
